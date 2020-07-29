@@ -1,0 +1,45 @@
+
+    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+       <div class="container">
+           <h2 style="text-align:center">Registration</h2>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>Name</label>
+                <input [class.is-invalid]="registrationForm.get('name').invalid && registrationForm.get('name').touched" formControlName="name" class="form-control" type="text">
+                <div *ngIf="registrationForm.get('name').invalid && registrationForm.get('name').touched">
+                  <small *ngIf="!!registrationForm.get('name').errors?.required" class="text-danger">Name is required</small>         
+                </div>
+            </div>
+        
+            <div class="form-group">
+                <label>Email</label>
+                <input [class.is-invalid]="registrationForm.get('email').invalid && registrationForm.get('email').touched" formControlName="email" type="email" class="form-control" name="registrationForm.get('email')">
+                <small *ngIf="registrationForm.get('email').invalid && registrationForm.get('email').touched" class="text-danger">Email is required</small>
+              </div>
+
+              <div class="form-group">
+                <label>Mobile</label>
+                <input [class.is-invalid]="registrationForm.get('mobile').invalid && registrationForm.get('mobile').touched" formControlName="mobile" type="tel" class="form-control" name="registrationForm.get('mobile')">
+                <small *ngIf="registrationForm.get('mobile').invalid && registrationForm.get('mobile').touched" class="text-danger">Mobile Number is required</small>
+              </div>
+
+              <ng-container *ngIf="!isInUpdateMode">
+                <div class="form-group">
+                  <label>Password</label>
+                  <input formControlName="password" type="password" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label> Confirm Password</label>
+                  <input [class.is-invalid]="!!registrationForm.errors?.misMatch" formControlName="confirmPassword" type="password" class="form-control">
+                  <small *ngIf="!!registrationForm.errors?.misMatch" class="text-danger ">Confirm Password does not match to password</small>
+                </div>
+              </ng-container>
+
+              <div class="form-group">
+                <button [disabled]="registrationForm.invalid" class="btn btn-primary">{{isInUpdateMode ? 'Update' : 'Register'}}</button>
+                <button (click)="goToList()" class="btn btn-primary">Go to User List</button>
+              </div>
+        </div>
+       </div>
+    </form>
+    
