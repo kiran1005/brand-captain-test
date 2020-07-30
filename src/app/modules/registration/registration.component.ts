@@ -36,12 +36,12 @@ export class RegistrationComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    debugger
+   
     this.userId=this._Activated.snapshot.params.userId;    
     
    
     if (this.userId) {
-      debugger
+    
       const temp=localStorage.getItem('user-list') as any;
       this.dataList=JSON.parse(temp);
       this.dataList.map((val,index)=>{
@@ -59,6 +59,8 @@ export class RegistrationComponent implements OnInit {
     }
     // localStorage.clear();
   }
+
+  
 
   onSubmit() {
     if (this.userId) {      
@@ -94,6 +96,8 @@ export class RegistrationComponent implements OnInit {
       this._Router.navigate(['/user-list']);
     
   }
+
+  
 
 }
 

@@ -1,42 +1,58 @@
 <div class="container my-5">
-    <h5 class="font-weight-bold mb-4">User Details</h5>
-    <div class="table-responsive table-container border-right border-left border-bottom mb-3">
-      <div *ngIf="userlist.length">
-        <table class="table mb-0">
-          <thead>
-            <tr>
-              <th>User Name</th>
-              <th>Email</th>
-              <th>Mobile Number</th>
-              <th>Password</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody >
-            <ng-container *ngFor='let arr of userlist'>
-              <tr>
-                <td>{{arr.name}}</td>  
-                <td>{{arr.email}}</td>  
-                <td>{{arr.mobile}}</td>  
-                <td>{{arr.password}}</td>       
-                <td>
-                  <div class="btn-group">
-                      <button (click)="deleteEmp(arr.id)" class="btn btn-sm btn-outline-danger"> Delete</button>
-                      <button (click)="editEmp(arr.id)" class="btn btn-sm btn-outline-primary"> Edit</button>
-                  </div>
-                </td>
-              </tr>
-            </ng-container>
-      
-          </tbody>
-        </table>
-      </div>
-      <div *ngIf="!userlist.length">
-        <h1>No Data Is available</h1>
-      </div>
-    </div>
-    <div class="text-right">
-      <button (click)='onExcel()' class="btn btn-primary">Export to Excel</button>
-    </div>
-  </div>
+  <h5 class="font-weight-bold mb-4 text-center">User Details</h5>
   
+    <ng-container *ngIf="userlist.length;else nodata">
+      <div class="row mb-3">
+        <div class="col-6">
+          <select (change)="sortList()" class="form-control w-50" [(ngModel)]="selectValue">
+            <option disabled value="select">select</option>
+            <option value="Asc">Ascending</option>
+            <option value="Desc">Descending</option>           
+          </select>
+        </div>
+        <div class="col-6 text-right">
+          <button (click)='onExcel()' class="btn btn-primary">Export to Excel</button>
+
+        </div>
+      </div>
+      <table class="table mb-0 table-hover table-striped table-bordered">
+        <thead>
+          <tr>
+            <th>User Name</th>
+            <th>Email</th>
+            <th>Mobile Number</th>
+            <th>Password</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor='let arr of userList'>
+            <tr>
+              <td>{{arr.name}}</td>
+              <td>{{arr.email}}</td>
+              <td>{{arr.mobile}}</td>
+              <td>{{arr.password}}</td>
+              <td>
+                <div class="btn-group">
+                  <button (click)="deleteEmp(arr.id)" class="btn btn-sm btn-outline-danger"> Delete</button>
+                  <button (click)="editEmp(arr.id)" class="btn btn-sm btn-outline-primary"> Edit</button>
+                </div>
+              </td>
+            </tr>
+          </ng-container>
+
+        </tbody>
+      </table>
+    
+    </ng-container>
+    <ng-template #nodata>
+      <h1>No Data Is available</h1>
+    </ng-template>
+  
+    <div class="row  mt-3">
+      <div class="col text-right">
+        <ngb-pagination class="d-flex justify-content-end" [collectionSize]="count"
+        (pageChange)="pageChanged($event)" [(page)]="pageNumber" [pageSize]="pageSize"></ngb-pagination>
+      </div>
+    </div>
+</div>

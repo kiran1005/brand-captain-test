@@ -28,7 +28,7 @@
                   <label>Password</label>
                   <input formControlName="password" type="password" class="form-control">
                 </div>
-                <div class="form-group">
+                <div class="form-group" *ngIf="!userId">
                   <label> Confirm Password</label>
                   <input [class.is-invalid]="!!registrationForm.errors?.misMatch" formControlName="confirmPassword" type="password" class="form-control">
                   <small *ngIf="!!registrationForm.errors?.misMatch" class="text-danger ">Confirm Password does not match to password</small>
@@ -36,8 +36,8 @@
               </ng-container>
 
               <div class="form-group">
-                <button [disabled]="registrationForm.invalid" class="btn btn-primary">{{isInUpdateMode ? 'Update' : 'Register'}}</button>
-                <button (click)="goToList()" class="btn btn-primary">Go to User List</button>
+                <button [disabled]="registrationForm.invalid"  class="btn btn-primary">{{userId ? 'Update' : 'Register'}}</button>
+                <button  (click)="goToList()" class="btn btn-primary">Go to User List</button>
               </div>
         </div>
        </div>

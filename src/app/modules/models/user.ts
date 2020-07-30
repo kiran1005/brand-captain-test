@@ -1,7 +1,5 @@
 export class User {
-    constructor(
-    //   public firstName: string,
-    //   public lastName: string,
+    constructor(   
       public name: string,
       public email: string,
       public mobile:string,
@@ -10,8 +8,7 @@ export class User {
      public id:string
     ) { }
   }
-  export interface UserData {
- 
+  export interface UserData { 
     name: string;
     email: string;
     mobile:string,
